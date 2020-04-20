@@ -16,6 +16,7 @@ class Play extends Phaser.Scene{
 
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion2.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        this.load.spritesheet('fastexplosion', './assets/fastexplosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
 
     create() {
@@ -53,6 +54,11 @@ class Play extends Phaser.Scene{
         this.anims.create({
             key: 'explode', 
             frames: this.anims.generateFrameNumbers('explosion', {start: 0, end: 9, first: 0}), 
+            frameRate: 30
+        });
+        this.anims.create({
+            key: 'fastexplode', 
+            frames: this.anims.generateFrameNumbers('fastexplosion', {start: 0, end: 9, first: 0}), 
             frameRate: 30
         });
 
@@ -96,7 +102,7 @@ class Play extends Phaser.Scene{
     update() {
         //chekc key input for restart
         if( this.gameOver && Phaser.Input.Keyboard.JustDown(keyF)) {
-            this.scene.restand(this.p1Score);
+            this.scene.restart(this.p1Score);
         }
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
             this.scene.start("menuScene");
@@ -158,7 +164,12 @@ class Play extends Phaser.Scene{
         // create explosion sprite at ship's position
         let boom = this.add.sprite(ship.x, ship.y, 'explotion').setOrigin(0, 0);
         //play explode anim
-        boom.anims.play('explode');
+        if( ship == this.fastship01){
+            boom.anims.play('fastexplode');
+        }
+        else{
+            boom.anims.play('explode');
+        }
         //callback after animation completes
         boom.on('animationcomplete', () => {
             ship.reset();                       //reset ship position
