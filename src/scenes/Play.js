@@ -15,6 +15,7 @@ class Play extends Phaser.Scene{
         this.load.image('bottom', './assets/bottom.png');
         this.load.image('left', './assets/pillarL.png');
         this.load.image('right', './assets/pillarR.png');
+        this.load.image('scoreDisplay', './assets/scoreDisplay.png');
 
 
         // load spritesheet
@@ -34,6 +35,7 @@ class Play extends Phaser.Scene{
         //this.add.rectangle(603, 5, 32, 455, 0xFFFFFF).setOrigin(0, 0);
         // green ui background
         //this.add.rectangle(37, 42, 566, 64, 0x00FF00).setOrigin(0, 0);
+        var scoreDisplay = this.add.image(37, 35, 'scoreDisplay').setOrigin(0, 0);
 
         // add rocket for p1
         this.p1Rocket = new Rocket(this, game.config.width/2, 431, 'rocket').setScale(0.5, 0.5).setOrigin(0, 0);
@@ -72,7 +74,7 @@ class Play extends Phaser.Scene{
             fontFamily: 'Courier',
             fontSize: '28px',
             //backgroundColor: '#F3B141', 
-            color: '#843605',
+            color: '#FFFFFF',
             align: 'right',
             /*padding: {
                 top: 5, 
@@ -81,7 +83,7 @@ class Play extends Phaser.Scene{
             */
            //fixedWidth: 100
         }
-        this.scoreLeft = this.add.text(69, 54, this.p1Score, scoreConfig);
+        this.scoreLeft = this.add.text(120, 43, this.p1Score, scoreConfig);
 
         //game over flag
         this.gameOver = false;
