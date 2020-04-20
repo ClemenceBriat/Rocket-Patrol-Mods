@@ -8,20 +8,25 @@ class Menu extends Phaser.Scene{
         this.load.audio('sfx_select', './assets/blip_select12.wav');
         this.load.audio('sfx_explosion', './assets/explosion38.wav');
         this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
+        this.load.image('top', './assets/top.png');
+        this.load.image('bottom', './assets/bottom.png');
+        this.load.image('left', './assets/pillarL.png');
+        this.load.image('right', './assets/pillarR.png');
     }
 
     create() {
         //menu display
         let menuConfig = {
-            fontFamily: 'Courier',
+            fontFamily: 'Palatino',
             fontSize: '28px',
-            backgroundColor: '#F3B141', 
-            color: '#843605',
+            //backgroundColor: '#F3B141', 
+            color: '#FFFFFF',
             align: 'right',
-            padding: {
+            /*padding: {
                 top: 5, 
                 bottom: 5,
             },
+            */
             fixedWidth: 0
         }
 
@@ -31,11 +36,19 @@ class Menu extends Phaser.Scene{
         let textSpacer = 64;
 
         this.add.text(centerX, centerY - textSpacer, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
+        menuConfig.fontFamily = 'Tahoma';
+        menuConfig.color = '#3395FF';
         this.add.text(centerX, centerY, 'Use <- -> arrows to move & (F) to Fire', menuConfig).setOrigin(0.5);
-        menuConfig.backgroundColor = '#00FF00';
-        menuConfig.color = '#000';
+        //menuConfig.backgroundColor = '#00FF00';
+        menuConfig.color = '#FF5734';
         this.add.text(centerX, centerY + textSpacer, 'Press <- for Easy or -> for Hard', menuConfig).setOrigin(0.5);
         
+        //border
+        var top = this.add.image(5, 5, 'top').setScale(1.39, 1).setOrigin(0, 0);
+        var left = this.add.image(5, 32, 'left').setScale(1.17, 0.91).setOrigin(0, 0);
+        var bottom = this.add.image(5, 446, 'bottom').setScale(1.39, 1).setOrigin(0, 0);
+        var right = this.add.image(603, 32, 'right').setScale(1.17, 0.91).setOrigin(0, 0);
+
         // starts next scene
         //this.scene.start("playScene");
 

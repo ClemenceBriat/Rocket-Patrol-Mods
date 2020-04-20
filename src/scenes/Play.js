@@ -11,10 +11,6 @@ class Play extends Phaser.Scene{
         this.load.image('starfield2', './assets/starfield2.png');
         this.load.image('starfield3', './assets/starfield3.png');
         this.load.image('fastship', './assets/fastship.png');
-        this.load.image('top', './assets/top.png');
-        this.load.image('bottom', './assets/bottom.png');
-        this.load.image('left', './assets/pillarL.png');
-        this.load.image('right', './assets/pillarR.png');
         this.load.image('scoreDisplay', './assets/scoreDisplay.png');
 
 
