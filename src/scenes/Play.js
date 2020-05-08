@@ -30,8 +30,11 @@ class Play extends Phaser.Scene{
         //this.add.rectangle(5, 443, 630, 32, 0xFFFFFF).setOrigin(0, 0);
         //this.add.rectangle(5, 5, 32, 455, 0xFFFFFF).setOrigin(0, 0);
         //this.add.rectangle(603, 5, 32, 455, 0xFFFFFF).setOrigin(0, 0);
+
         // green ui background
         //this.add.rectangle(37, 42, 566, 64, 0x00FF00).setOrigin(0, 0);
+
+        //Score Display image 
         var scoreDisplay = this.add.image(37, 35, 'scoreDisplay').setOrigin(0, 0);
 
         // add rocket for p1
@@ -93,14 +96,21 @@ class Play extends Phaser.Scene{
         //60-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
-            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER',scoreConfig).setOrigin(0.5);
-            this.add.text(game.config.width/2, game.config.height/2 + 64, '(F)ire to Restart or <- for Menu',scoreConfig).setOrigin(0.5);
+            console.log(game.settings.highScore);
+            if (this.p1Score > game.settings.highScore) {
+                console.log("update");
+                game.settings.highScore = this.p1Score;
+            }
+            this.add.text(game.config.width/2, game.config.height/2 - 64, 'Highscore: ' + game.settings.highScore, scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 + 64, '(F)ire to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
     }
 
     update() {
-        //chekc key input for restart
+        //check key input for restart
+        
         if( this.gameOver && Phaser.Input.Keyboard.JustDown(keyF)) {
             this.scene.restart(this.p1Score);
         }
