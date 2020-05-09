@@ -38,10 +38,7 @@ class Menu extends Phaser.Scene{
         this.add.text(centerX, centerY - textSpacer, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
         menuConfig.fontFamily = 'Tahoma';
         menuConfig.color = '#3395FF';
-        this.add.text(centerX, centerY, 'Use <- -> arrows to move & (F) to Fire', menuConfig).setOrigin(0.5);
-        //menuConfig.backgroundColor = '#00FF00';
-        menuConfig.color = '#FF5734';
-        this.add.text(centerX, centerY + textSpacer, 'Press <- for Easy or -> for Hard', menuConfig).setOrigin(0.5);
+        this.add.text(centerX, centerY + textSpacer, 'Press SPACE to Start', menuConfig).setOrigin(0.5);
         
         //border
         var top = this.add.image(5, 5, 'top').setScale(1.39, 1).setOrigin(0, 0);
@@ -50,35 +47,16 @@ class Menu extends Phaser.Scene{
         var right = this.add.image(603, 32, 'right').setScale(1.17, 0.91).setOrigin(0, 0);
 
         // starts next scene
-        //this.scene.start("playScene");
+        //this.scene.start("instructScene");
 
         //define keys
-        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
     update() {
-        if(Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-            //easy mode
-            game.settings = {
-                spaceshipSpeed: 3,
-                fastshipSpeed: 5,
-                gameTimer: 10000,
-                highScore: 0
-            }
+        if(Phaser.Input.Keyboard.JustDown(keySPACE)) {
             this.sound.play('sfx_select');
-            this.scene.start("playScene");
-        }
-        if(Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
-            //hard mode
-            game.settings = {
-                spaceshipSpeed: 4,
-                fastshipSpeed: 6,
-                gameTimer: 45000,
-                highScore: 0
-            }
-            this.sound.play('sfx_select');
-            this.scene.start("playScene");
+            this.scene.start("instructScene");
         }
     }
 }

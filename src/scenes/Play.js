@@ -12,7 +12,7 @@ class Play extends Phaser.Scene{
         this.load.image('starfield3', './assets/starfield3.png');
         this.load.image('fastship', './assets/fastship.png');
         this.load.image('scoreDisplay', './assets/scoreDisplay.png');
-
+        //this.load.image('fire', './assets/fire.png');
 
         // load spritesheet
         this.load.spritesheet('explosion', './assets/explosion2.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
@@ -88,6 +88,15 @@ class Play extends Phaser.Scene{
             */
            //fixedWidth: 100
         }
+
+        //FIRE dsiplay
+        this.fireConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            color: '#FFFFFF',
+            align: 'right',
+        }
+
         this.scoreLeft = this.add.text(120, 43, this.p1Score, scoreConfig);
 
         //game over flag
@@ -96,9 +105,7 @@ class Play extends Phaser.Scene{
         //60-second play clock
         scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
-            console.log(game.settings.highScore);
             if (this.p1Score > game.settings.highScore) {
-                console.log("update");
                 game.settings.highScore = this.p1Score;
             }
             this.add.text(game.config.width/2, game.config.height/2 - 64, 'Highscore: ' + game.settings.highScore, scoreConfig).setOrigin(0.5);
@@ -109,6 +116,7 @@ class Play extends Phaser.Scene{
     }
 
     update() {
+
         //check key input for restart
         
         if( this.gameOver && Phaser.Input.Keyboard.JustDown(keyF)) {
@@ -125,6 +133,15 @@ class Play extends Phaser.Scene{
         if (!this.gameOver) {
             //update rocket
             this.p1Rocket.update();
+            /*
+            if(this.p1Rocket.hasFired) {
+                console.long('created');
+                this.fireText = this.add.text(game.config.width/2, 100, 'FIRE', this.fireConfig).setOrigin(0.5);
+                if(!this.p1Rocket.isFiring) {
+                    this.fireText.destroy();
+                }
+            }
+            */
 
             //update spaceship
             this.ship01.update();
