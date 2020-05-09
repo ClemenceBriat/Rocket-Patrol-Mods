@@ -36,7 +36,7 @@ class Menu extends Phaser.Scene{
         let textSpacer = 64;
 
         this.add.text(centerX, centerY - textSpacer, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
-        menuConfig.fontFamily = 'Tahoma';
+        menuConfig.fontFamily = 'Modak';
         menuConfig.color = '#3395FF';
         this.add.text(centerX, centerY + textSpacer, 'Press SPACE to Start', menuConfig).setOrigin(0.5);
         

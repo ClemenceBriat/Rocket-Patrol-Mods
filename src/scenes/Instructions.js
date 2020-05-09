@@ -67,7 +67,7 @@ class Instructions extends Phaser.Scene{
             game.settings = {
                 spaceshipSpeed: 3,
                 fastshipSpeed: 5,
-                gameTimer: 10000,
+                gameTimer: 60000,
                 highScore: 0
             }
             this.sound.play('sfx_select');

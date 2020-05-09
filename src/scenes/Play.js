@@ -102,8 +102,13 @@ class Play extends Phaser.Scene{
         //game over flag
         this.gameOver = false;
 
+        //30-second speed increase
+        this.clock = this.time.delayedCall(30000, () => {
+            game.settings.spaceshipSpeed = game.settings.spaceshipSpeed * 2;
+            game.settings.fastshipSpeed = game.settings.fastshipSpeed * 2;
+        }, null, this);
+
         //60-second play clock
-        scoreConfig.fixedWidth = 0;
         this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             if (this.p1Score > game.settings.highScore) {
                 game.settings.highScore = this.p1Score;
